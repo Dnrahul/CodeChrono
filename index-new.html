@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Days of Code - Reel Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Controls Panel -->
+    <div class="controls">
+        <h3>✏️ Customize Template</h3>
+        
+        <label>Template Style:</label>
+        <select id="templateStyle" onchange="changeTemplate()">
+            <option value="neon">🌟 Neon Cyber</option>
+            <option value="ocean">🌊 Ocean Blue</option>
+            <option value="sunset">🌅 Sunset</option>
+            <option value="forest">🌲 Forest Green</option>
+            <option value="dark">🌑 Dark Mode</option>
+            <option value="custom">✨ Custom</option>
+        </select>
+
+        <label>Custom Title:</label>
+        <input type="text" id="customTitle" value="100 DAYS OF CODE" placeholder="Enter title">
+        
+        <label>Current Day:</label>
+        <input type="number" id="dayNumber" value="45" min="1" max="999">
+
+        <label>Total Days:</label>
+        <input type="number" id="totalDays" value="100" min="1" max="999">
+
+        <details style="margin-top: 15px; color: #b8b8ff;">
+            <summary style="cursor: pointer; color: #00ffff; margin-bottom: 10px;">✨ Title Customization</summary>
+            <label style="margin-top: 10px;">Title Font:</label>
+            <select id="titleFont" onchange="applyTitleStyles()" style="width: 100%; padding: 8px; margin-bottom: 15px; background: rgba(0, 255, 255, 0.1); border: 1px solid #00ffff; border-radius: 5px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; cursor: pointer;">
+                <option value="JetBrains Mono">JetBrains Mono</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Impact">Impact</option>
+            </select>
+
+            <label>Title Text Color:</label>
+            <input type="color" id="titleTextColor" value="#00ffff" onchange="applyTitleStyles()">
+
+            <label>Title Background Color:</label>
+            <input type="color" id="titleBgColor" value="#1a1a2e" onchange="applyTitleStyles()">
+
+            <label>Title Background Opacity:</label>
+            <input type="range" id="titleBgOpacity" min="0" max="100" value="0" onchange="applyTitleStyles()" style="width: 100%; cursor: pointer;">
+            <span id="opacityValue" style="color: #00ffff; font-size: 12px;">0%</span>
+
+            <label>Title Font Size:</label>
+            <input type="range" id="titleFontSize" min="30" max="100" value="72" onchange="applyTitleStyles()" style="width: 100%; cursor: pointer; margin-bottom: 15px;">
+            <span id="fontSizeValue" style="color: #00ffff; font-size: 12px;">72px</span>
+        </details>
+        
+        <label>Project Name:</label>
+        <input type="text" id="projectName" value="Salify.in - File Compressor">
+        
+        <label>Tech Stack (comma-separated):</label>
+        <input type="text" id="techStack" value="React, Vite, Tailwind">
+        
+        <label>Description:</label>
+        <textarea id="description" rows="3">Built a powerful file compression tool that works offline. Features batch processing and multiple compression modes.</textarea>
+        
+        <details style="margin-top: 15px; color: #b8b8ff;">
+            <summary style="cursor: pointer; color: #00ffff; margin-bottom: 10px;">🎨 Background Customization</summary>
+            <label style="margin-top: 10px;">Color 1:</label>
+            <input type="color" id="bgColor1" value="#0f0c29">
+            
+            <label>Color 2:</label>
+            <input type="color" id="bgColor2" value="#302b63">
+            
+            <label>Color 3:</label>
+            <input type="color" id="bgColor3" value="#24243e">
+            
+            <button onclick="applyCustomBackground()" style="margin-top: 10px; background: #00ffff; font-size: 12px;">Apply Colors</button>
+        </details>
+
+        <details style="margin-top: 15px; color: #b8b8ff;">
+            <summary style="cursor: pointer; color: #00ffff; margin-bottom: 10px;">📱 Social Media & Text</summary>
+            <label style="margin-top: 10px;">Social Handle:</label>
+            <input type="text" id="socialHandle" value="@technatic_dn" placeholder="Your handle">
+            
+            <label>Hashtags:</label>
+            <input type="text" id="hashtags" value="#100DaysOfCode #CodingChallenge #WebDev">
+            
+            <label>Social Icons:</label>
+            <div style="display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap;">
+                <button onclick="toggleIcon('github')" class="icon-btn" data-icon="github" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px; min-width: 50px;">🐙 GitHub</button>
+                <button onclick="toggleIcon('twitter')" class="icon-btn" data-icon="twitter" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px; min-width: 50px;">𝕏 Twitter</button>
+                <button onclick="toggleIcon('linkedin')" class="icon-btn" data-icon="linkedin" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px; min-width: 50px;">💼 LinkedIn</button>
+            </div>
+            <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                <button onclick="toggleIcon('portfolio')" class="icon-btn" data-icon="portfolio" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px;">🌐 Portfolio</button>
+                <button onclick="toggleIcon('instagram')" class="icon-btn" data-icon="instagram" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px;">📷 Instagram</button>
+            </div>
+        </details>
+        
+        <button onclick="updateTemplate()" style="margin-top: 10px;">Update Template</button>
+        <button onclick="downloadImage()" style="margin-top: 10px; background: #00ff88;">📥 Download Image</button>
+        <button onclick="downloadAsScreenshot()" style="margin-top: 5px; background: #b8b8ff; font-size: 11px;">📸 Screenshot Guide</button>
+    </div>
+
+    <!-- Main Template -->
+    <div class="container" id="template">
+        <!-- Background Effects -->
+        <div class="grid-background"></div>
+        <div class="circuit-pattern"></div>
+
+        <!-- Decorative Code Symbols -->
+        <div class="code-symbol">{</div>
+        <div class="code-symbol">}</div>
+        <div class="code-symbol">&lt;/&gt;</div>
+        <div class="code-symbol">{ }</div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <div class="code-brackets">&lt;/&gt;</div>
+            <h1 class="main-title">100 DAYS OF CODE</h1>
+            <div class="day-counter">
+                DAY <span class="current" id="currentDay">45</span>/<span id="totalDayDisplay">100</span>
+            </div>
+        </div>
+
+        <!-- Project Showcase Area -->
+        <div class="showcase">
+            <div class="terminal-cursor"></div>
+            <div class="showcase-placeholder">
+                <div class="icon">💻</div>
+                <p>PROJECT SCREENSHOT</p>
+                <p style="font-size: 20px; margin-top: 10px;">Replace this area with your demo</p>
+            </div>
+        </div>
+
+        <!-- Project Details Box -->
+        <div class="project-details">
+            <h2 class="project-name" id="projectNameDisplay">Salify.in - File Compressor</h2>
+            
+            <div class="tech-stack" id="techStackDisplay">
+                <div class="tech-badge">⚛️ React</div>
+                <div class="tech-badge">⚡ Vite</div>
+                <div class="tech-badge">🎨 Tailwind</div>
+            </div>
+            
+            <p class="description" id="descriptionDisplay">
+                Built a powerful file compression tool that works offline. Features batch processing and multiple compression modes.
+            </p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>Progress</span>
+                <span id="progressPercent">45%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <div class="social-handle" id="socialHandleDisplay">@technatic_dn</div>
+            
+            <div class="status-badges" id="socialMediaIcons">
+                <!-- Social media icons will be added dynamically -->
+            </div>
+            
+            <div class="hashtags" id="hashtagsDisplay">
+                #100DaysOfCode #CodingChallenge #WebDev
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

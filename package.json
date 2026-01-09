@@ -1,0 +1,28 @@
+{
+  "name": "100-days-of-code-template",
+  "version": "2.0.0",
+  "description": "A professional Instagram reel template for #100DaysOfCode challenge with customizable designs and features",
+  "main": "index-new.html",
+  "scripts": {
+    "start": "open index-new.html",
+    "build": "echo 'No build step required - this is a static site'"
+  },
+  "keywords": [
+    "100DaysOfCode",
+    "Instagram",
+    "Template",
+    "Reel",
+    "Social Media",
+    "Neon",
+    "Customizable"
+  ],
+  "author": "Your Name",
+  "license": "Free to use",
+  "dependencies": {
+    "html2canvas": "^1.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-repo-url"
+  }
+}

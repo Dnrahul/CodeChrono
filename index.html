@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 Days of Code - Reel Template</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0a0a0a;
+            padding: 20px;
+        }
+
+        .container {
+            width: 1080px;
+            height: 1920px;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animated Grid Background */
+        .grid-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Circuit Pattern Overlay */
+        .circuit-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="2" fill="%2300ffff"/><circle cx="90" cy="90" r="2" fill="%2300ffff"/><line x1="10" y1="10" x2="90" y2="90" stroke="%2300ffff" stroke-width="1"/></svg>');
+        }
+
+        /* Header Section */
+        .header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 80px 60px 60px;
+        }
+
+        .code-brackets {
+            font-size: 60px;
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .main-title {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00ffff 0%, #00ff88 50%, #00ffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .day-counter {
+            font-size: 120px;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 
+                0 0 10px rgba(0, 255, 255, 0.8),
+                0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 30px rgba(0, 255, 255, 0.4);
+            margin: 20px 0;
+        }
+
+        .day-counter .current {
+            color: #00ffff;
+        }
+
+        /* Project Showcase Area */
+        .showcase {
+            position: relative;
+            margin: 40px 60px;
+            height: 650px;
+            border: 3px solid #00ffff;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.5),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), inset 0 0 30px rgba(0, 255, 255, 0.2); }
+        }
+
+        .showcase-placeholder {
+            text-align: center;
+            color: #00ffff;
+            opacity: 0.5;
+        }
+
+        .showcase-placeholder .icon {
+            font-size: 120px;
+            margin-bottom: 20px;
+        }
+
+        .showcase-placeholder p {
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        /* Terminal Cursor */
+        .terminal-cursor {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 20px;
+            height: 30px;
+            background: #00ff88;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Project Details Box */
+        .project-details {
+            margin: 40px 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-name {
+            font-size: 48px;
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            padding: 12px 24px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            color: #00ffff;
+            font-size: 22px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .description {
+            font-size: 26px;
+            color: #b8b8ff;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            margin: 40px 60px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #00ffff;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ffff 0%, #00ff88 100%);
+            width: 45%; /* Change this to match your day */
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            animation: progressGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 255, 1); }
+        }
+
+        /* Footer Section */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 60px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        .social-handle {
+            font-size: 52px;
+            font-weight: 700;
+            color: #00ffff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+
+        .status-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .status-badge {
+            padding: 15px 30px;
+            background: rgba(0, 255, 136, 0.2);
+            border: 2px solid #00ff88;
+            border-radius: 30px;
+            color: #00ff88;
+            font-size: 26px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hashtags {
+            text-align: center;
+            color: #b8b8ff;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        /* Decorative Code Symbols */
+        .code-symbol {
+            position: absolute;
+            font-size: 40px;
+            color: rgba(0, 255, 255, 0.2);
+            font-weight: 700;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .code-symbol:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; }
+        .code-symbol:nth-child(2) { top: 35%; right: 10%; animation-delay: 1s; }
+        .code-symbol:nth-child(3) { top: 60%; left: 8%; animation-delay: 2s; }
+        .code-symbol:nth-child(4) { top: 80%; right: 12%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Controls Panel */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #00ffff;
+            z-index: 1000;
+            max-width: 300px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        .controls::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .controls::-webkit-scrollbar-track {
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .controls::-webkit-scrollbar-thumb {
+            background: #00ffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+
+        .controls::-webkit-scrollbar-thumb:hover {
+            background: #00ff88;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+        }
+
+        .controls h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .controls label {
+            color: #b8b8ff;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .controls input,
+        .controls textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .controls button {
+            width: 100%;
+            padding: 10px;
+            background: #00ffff;
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .controls button:hover {
+            background: #00ff88;
+        }
+
+        .controls select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .controls select option {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .controls details {
+            border-left: 2px solid #00ffff;
+            padding-left: 10px;
+        }
+
+        .controls summary {
+            user-select: none;
+        }
+            .container {
+                transform: scale(0.5);
+                transform-origin: top center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Controls Panel -->
+    <div class="controls">
+        <h3>✏️ Customize Template</h3>
+        
+        <label>Template Style:</label>
+        <select id="templateStyle" onchange="changeTemplate()">
+            <option value="neon">🌟 Neon Cyber</option>
+            <option value="ocean">🌊 Ocean Blue</option>
+            <option value="sunset">🌅 Sunset</option>
+            <option value="forest">🌲 Forest Green</option>
+            <option value="dark">🌑 Dark Mode</option>
+            <option value="custom">✨ Custom</option>
+        </select>
+
+        <label>Custom Title:</label>
+        <input type="text" id="customTitle" value="100 DAYS OF CODE" placeholder="Enter title">
+        
+        <label>Current Day:</label>
+        <input type="number" id="dayNumber" value="45" min="1" max="999">
+
+        <label>Total Days:</label>
+        <input type="number" id="totalDays" value="100" min="1" max="999">
+
+        <details style="margin-top: 15px; color: #b8b8ff;">
+            <summary style="cursor: pointer; color: #00ffff; margin-bottom: 10px;">✨ Title Customization</summary>
+            <label style="margin-top: 10px;">Title Font:</label>
+            <select id="titleFont" onchange="applyTitleStyles()" style="width: 100%; padding: 8px; margin-bottom: 15px; background: rgba(0, 255, 255, 0.1); border: 1px solid #00ffff; border-radius: 5px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; cursor: pointer;">
+                <option value="JetBrains Mono">JetBrains Mono</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Impact">Impact</option>
+            </select>
+
+            <label>Title Text Color:</label>
+            <input type="color" id="titleTextColor" value="#00ffff" onchange="applyTitleStyles()">
+
+            <label>Title Background Color:</label>
+            <input type="color" id="titleBgColor" value="#1a1a2e" onchange="applyTitleStyles()">
+
+            <label>Title Background Opacity:</label>
+            <input type="range" id="titleBgOpacity" min="0" max="100" value="0" onchange="applyTitleStyles()" style="width: 100%; cursor: pointer;">
+            <span id="opacityValue" style="color: #00ffff; font-size: 12px;">0%</span>
+
+            <label>Title Font Size:</label>
+            <input type="range" id="titleFontSize" min="30" max="100" value="72" onchange="applyTitleStyles()" style="width: 100%; cursor: pointer; margin-bottom: 15px;">
+            <span id="fontSizeValue" style="color: #00ffff; font-size: 12px;">72px</span>
+        </details>
+        
+        <label>Project Name:</label>
+        <input type="text" id="projectName" value="Salify.in - File Compressor">
+        
+        <label>Tech Stack (comma-separated):</label>
+        <input type="text" id="techStack" value="React, Vite, Tailwind">
+        
+        <label>Description:</label>
+        <textarea id="description" rows="3">Built a powerful file compression tool that works offline. Features batch processing and multiple compression modes.</textarea>
+        
+        <details style="margin-top: 15px; color: #b8b8ff;">
+            <summary style="cursor: pointer; color: #00ffff; margin-bottom: 10px;">🎨 Background Customization</summary>
+            <label style="margin-top: 10px;">Color 1:</label>
+            <input type="color" id="bgColor1" value="#0f0c29">
+            
+            <label>Color 2:</label>
+            <input type="color" id="bgColor2" value="#302b63">
+            
+            <label>Color 3:</label>
+            <input type="color" id="bgColor3" value="#24243e">
+            
+            <button onclick="applyCustomBackground()" style="margin-top: 10px; background: #00ffff; font-size: 12px;">Apply Colors</button>
+        </details>
+
+        <details style="margin-top: 15px; color: #b8b8ff;">
+            <summary style="cursor: pointer; color: #00ffff; margin-bottom: 10px;">📱 Social Media & Text</summary>
+            <label style="margin-top: 10px;">Social Handle:</label>
+            <input type="text" id="socialHandle" value="@technatic_dn" placeholder="Your handle">
+            
+            <label>Hashtags:</label>
+            <input type="text" id="hashtags" value="#100DaysOfCode #CodingChallenge #WebDev">
+            
+            <label>Social Icons:</label>
+            <div style="display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap;">
+                <button onclick="toggleIcon('github')" class="icon-btn" data-icon="github" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px; min-width: 50px;">🐙 GitHub</button>
+                <button onclick="toggleIcon('twitter')" class="icon-btn" data-icon="twitter" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px; min-width: 50px;">𝕏 Twitter</button>
+                <button onclick="toggleIcon('linkedin')" class="icon-btn" data-icon="linkedin" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px; min-width: 50px;">💼 LinkedIn</button>
+            </div>
+            <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                <button onclick="toggleIcon('portfolio')" class="icon-btn" data-icon="portfolio" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px;">🌐 Portfolio</button>
+                <button onclick="toggleIcon('instagram')" class="icon-btn" data-icon="instagram" style="flex: 1; padding: 8px; background: rgba(0, 255, 255, 0.2); border: 1px solid #00ffff; font-size: 10px;">📷 Instagram</button>
+            </div>
+        </details>
+        
+        <button onclick="updateTemplate()" style="margin-top: 10px;">Update Template</button>
+        <button onclick="downloadImage()" style="margin-top: 10px; background: #00ff88;">📥 Download Image</button>
+        <button onclick="downloadAsScreenshot()" style="margin-top: 5px; background: #b8b8ff; font-size: 11px;">📸 Screenshot Guide</button>
+    </div>
+
+    <!-- Main Template -->
+    <div class="container" id="template">
+        <!-- Background Effects -->
+        <div class="grid-background"></div>
+        <div class="circuit-pattern"></div>
+
+        <!-- Decorative Code Symbols -->
+        <div class="code-symbol">{</div>
+        <div class="code-symbol">}</div>
+        <div class="code-symbol">&lt;/&gt;</div>
+        <div class="code-symbol">{ }</div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <div class="code-brackets">&lt;/&gt;</div>
+            <h1 class="main-title">100 DAYS OF CODE</h1>
+            <div class="day-counter">
+                DAY <span class="current" id="currentDay">45</span>/<span id="totalDayDisplay">100</span>
+            </div>
+        </div>
+
+        <!-- Project Showcase Area -->
+        <div class="showcase">
+            <div class="terminal-cursor"></div>
+            <div class="showcase-placeholder">
+                <div class="icon">💻</div>
+                <p>PROJECT SCREENSHOT</p>
+                <p style="font-size: 20px; margin-top: 10px;">Replace this area with your demo</p>
+            </div>
+        </div>
+
+        <!-- Project Details Box -->
+        <div class="project-details">
+            <h2 class="project-name" id="projectNameDisplay">Salify.in - File Compressor</h2>
+            
+            <div class="tech-stack" id="techStackDisplay">
+                <div class="tech-badge">⚛️ React</div>
+                <div class="tech-badge">⚡ Vite</div>
+                <div class="tech-badge">🎨 Tailwind</div>
+            </div>
+            
+            <p class="description" id="descriptionDisplay">
+                Built a powerful file compression tool that works offline. Features batch processing and multiple compression modes.
+            </p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>Progress</span>
+                <span id="progressPercent">45%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer">
+            <div class="social-handle" id="socialHandleDisplay">@technatic_dn</div>
+            
+            <div class="status-badges" id="socialMediaIcons">
+                <!-- Social media icons will be added dynamically -->
+            </div>
+            
+            <div class="hashtags" id="hashtagsDisplay">
+                #100DaysOfCode #CodingChallenge #WebDev
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Template styles/colors
+        const templates = {
+            neon: {
+                name: 'Neon Cyber',
+                color1: '#0f0c29',
+                color2: '#302b63',
+                color3: '#24243e',
+                accentLight: '#00ffff',
+                accentDark: '#00ff88'
+            },
+            ocean: {
+                name: 'Ocean Blue',
+                color1: '#0a1628',
+                color2: '#1e3a5f',
+                color3: '#0d2747',
+                accentLight: '#00d4ff',
+                accentDark: '#00ffcc'
+            },
+            sunset: {
+                name: 'Sunset',
+                color1: '#2d1b00',
+                color2: '#662200',
+                color3: '#330011',
+                accentLight: '#ffaa00',
+                accentDark: '#ff6600'
+            },
+            forest: {
+                name: 'Forest Green',
+                color1: '#0a2e1a',
+                color2: '#1b5e3f',
+                color3: '#0d3d28',
+                accentLight: '#00ff88',
+                accentDark: '#00cc66'
+            },
+            dark: {
+                name: 'Dark Mode',
+                color1: '#0f0f0f',
+                color2: '#1a1a1a',
+                color3: '#0a0a0a',
+                accentLight: '#888888',
+                accentDark: '#aaaaaa'
+            },
+            custom: {
+                name: 'Custom',
+                color1: '#0f0c29',
+                color2: '#302b63',
+                color3: '#24243e',
+                accentLight: '#00ffff',
+                accentDark: '#00ff88'
+            }
+        };
+
+        let currentTemplate = 'neon';
+
+        const socialMediaData = {
+            github: { icon: '🐙', label: 'GitHub' },
+            twitter: { icon: '𝕏', label: 'Twitter' },
+            linkedin: { icon: '💼', label: 'LinkedIn' },
+            portfolio: { icon: '🌐', label: 'Portfolio' },
+            instagram: { icon: '📷', label: 'Instagram' }
+        };
+
+        let enabledIcons = ['github', 'instagram'];
+
+        function changeTemplate() {
+            const templateSelect = document.getElementById('templateStyle').value;
+            currentTemplate = templateSelect;
+            const template = templates[templateSelect];
+            applyTemplateColors(template);
+            updateTemplate();
+        }
+
+        function applyTemplateColors(template) {
+            const container = document.getElementById('template');
+            container.style.background = `linear-gradient(135deg, ${template.color1} 0%, ${template.color2} 50%, ${template.color3} 100%)`;
+            
+            // Update all cyan colors to new accent light
+            const elements = document.querySelectorAll('[style*="color: #00ffff"], [style*="border: 3px solid #00ffff"]');
+            elements.forEach(el => {
+                el.style.color = template.accentLight;
+                el.style.borderColor = template.accentLight;
+            });
+
+            // Update CSS variables for accent colors
+            const style = document.documentElement.style;
+            style.setProperty('--accent-light', template.accentLight);
+            style.setProperty('--accent-dark', template.accentDark);
+
+            // Update main title
+            const mainTitle = document.querySelector('.main-title');
+            if (mainTitle) {
+                mainTitle.style.background = `linear-gradient(90deg, ${template.accentLight} 0%, ${template.accentDark} 50%, ${template.accentLight} 100%)`;
+                mainTitle.style.backgroundSize = '200% auto';
+            }
+        }
+
+        function applyCustomBackground() {
+            const color1 = document.getElementById('bgColor1').value;
+            const color2 = document.getElementById('bgColor2').value;
+            const color3 = document.getElementById('bgColor3').value;
+
+            const customTemplate = {
+                name: 'Custom',
+                color1: color1,
+                color2: color2,
+                color3: color3,
+                accentLight: templates.neon.accentLight,
+                accentDark: templates.neon.accentDark
+            };
+
+            templates.custom = customTemplate;
+            document.getElementById('templateStyle').value = 'custom';
+            currentTemplate = 'custom';
+            applyTemplateColors(customTemplate);
+            updateTemplate();
+            alert('✨ Custom background applied!');
+        }
+
+        function applyTitleStyles() {
+            const mainTitle = document.querySelector('.main-title');
+            const titleFont = document.getElementById('titleFont').value;
+            const titleTextColor = document.getElementById('titleTextColor').value;
+            const titleBgColor = document.getElementById('titleBgColor').value;
+            const titleBgOpacity = document.getElementById('titleBgOpacity').value;
+            const titleFontSize = document.getElementById('titleFontSize').value;
+
+            // Apply font
+            mainTitle.style.fontFamily = titleFont;
+
+            // Apply font size
+            mainTitle.style.fontSize = titleFontSize + 'px';
+
+            // Apply text color with gradient fallback
+            if (titleBgOpacity > 0) {
+                mainTitle.style.color = titleTextColor;
+                mainTitle.style.backgroundImage = 'none';
+                mainTitle.style.backgroundColor = titleBgColor;
+                mainTitle.style.backgroundClip = 'padding-box';
+                mainTitle.style.WebkitBackgroundClip = 'padding-box';
+                mainTitle.style.WebkitTextFillColor = 'unset';
+            } else {
+                mainTitle.style.backgroundImage = `linear-gradient(90deg, ${titleTextColor} 0%, ${titleTextColor} 50%, ${titleTextColor} 100%)`;
+                mainTitle.style.backgroundSize = '200% auto';
+                mainTitle.style.WebkitBackgroundClip = 'text';
+                mainTitle.style.backgroundClip = 'text';
+                mainTitle.style.WebkitTextFillColor = 'transparent';
+            }
+
+            // Apply background with opacity
+            const opacity = titleBgOpacity / 100;
+            mainTitle.style.backgroundColor = titleBgColor + Math.floor(opacity * 255).toString(16).padStart(2, '0');
+            mainTitle.style.padding = titleBgOpacity > 0 ? '20px 30px' : '0';
+            mainTitle.style.borderRadius = titleBgOpacity > 0 ? '15px' : '0';
+
+            // Update opacity display
+            document.getElementById('opacityValue').textContent = titleBgOpacity + '%';
+            document.getElementById('fontSizeValue').textContent = titleFontSize + 'px';
+        }
+
+        function updateTemplate() {
+            const customTitle = document.getElementById('customTitle').value;
+            const dayNumber = document.getElementById('dayNumber').value;
+            const totalDays = document.getElementById('totalDays').value;
+            const projectName = document.getElementById('projectName').value;
+            const techStack = document.getElementById('techStack').value;
+            const description = document.getElementById('description').value;
+            const socialHandle = document.getElementById('socialHandle').value;
+            const hashtags = document.getElementById('hashtags').value;
+
+            // Update main title
+            document.querySelector('.main-title').textContent = customTitle;
+
+            // Update day counter
+            document.getElementById('currentDay').textContent = dayNumber;
+            document.getElementById('totalDayDisplay').textContent = totalDays;
+            
+            // Update progress
+            const progressPercent = dayNumber;
+            document.getElementById('progressPercent').textContent = progressPercent + '%';
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+
+            // Update project name
+            document.getElementById('projectNameDisplay').textContent = projectName;
+
+            // Update social handle
+            document.getElementById('socialHandleDisplay').textContent = socialHandle;
+
+            // Update hashtags
+            document.getElementById('hashtagsDisplay').textContent = hashtags;
+
+            // Update tech stack
+            const techStackDisplay = document.getElementById('techStackDisplay');
+            const techArray = techStack.split(',').map(tech => tech.trim());
+            const techIcons = {
+                'React': '⚛️',
+                'Vue': '💚',
+                'Angular': '🅰️',
+                'JavaScript': '🟨',
+                'TypeScript': '🔷',
+                'Python': '🐍',
+                'Node': '🟢',
+                'Express': '🚂',
+                'MongoDB': '🍃',
+                'PostgreSQL': '🐘',
+                'MySQL': '🐬',
+                'Firebase': '🔥',
+                'AWS': '☁️',
+                'Docker': '🐳',
+                'Kubernetes': '☸️',
+                'Tailwind': '🎨',
+                'CSS': '🎨',
+                'HTML': '📄',
+                'Vite': '⚡',
+                'Webpack': '📦',
+                'Git': '📚',
+                'GitHub': '🐙',
+                'Next.js': '▲',
+                'Redux': '🔮'
+            };
+
+            techStackDisplay.innerHTML = techArray.map(tech => {
+                const icon = techIcons[tech] || '🔧';
+                return `<div class="tech-badge">${icon} ${tech}</div>`;
+            }).join('');
+
+            // Update description
+            document.getElementById('descriptionDisplay').textContent = description;
+
+            // Update social media icons
+            updateSocialMediaIcons();
+        }
+
+        function toggleIcon(iconName) {
+            const index = enabledIcons.indexOf(iconName);
+            if (index > -1) {
+                enabledIcons.splice(index, 1);
+            } else {
+                enabledIcons.push(iconName);
+            }
+            updateSocialMediaIcons();
+            
+            // Update button styles
+            document.querySelectorAll('.icon-btn').forEach(btn => {
+                const icon = btn.getAttribute('data-icon');
+                if (enabledIcons.includes(icon)) {
+                    btn.style.background = 'rgba(0, 255, 255, 0.4)';
+                    btn.style.borderColor = '#00ff88';
+                } else {
+                    btn.style.background = 'rgba(0, 255, 255, 0.2)';
+                    btn.style.borderColor = '#00ffff';
+                }
+            });
+        }
+
+        function updateSocialMediaIcons() {
+            const iconsContainer = document.getElementById('socialMediaIcons');
+            iconsContainer.innerHTML = enabledIcons.map(iconName => {
+                const data = socialMediaData[iconName];
+                return `<div class="status-badge">${data.icon} ${data.label}</div>`;
+            }).join('');
+        }
+
+        async function downloadImage() {
+            const template = document.getElementById('template');
+            const controls = document.querySelector('.controls');
+            const downloadBtn = event.target;
+            
+            try {
+                // Show loading state
+                downloadBtn.textContent = '⏳ Generating...';
+                downloadBtn.disabled = true;
+                
+                // Hide controls temporarily
+                controls.style.display = 'none';
+                
+                // Store original styles
+                const originalTransform = template.style.transform;
+                const originalPosition = document.body.style.position;
+                const originalOverflow = document.body.style.overflow;
+                
+                // Set body to fixed position to prevent scrolling issues
+                document.body.style.position = 'fixed';
+                document.body.style.overflow = 'hidden';
+                
+                // Reset any transform on template
+                template.style.transform = 'none';
+                
+                // Wait a moment for styles to apply
+                await new Promise(resolve => setTimeout(resolve, 200));
+                
+                // Capture the template at exact Instagram dimensions
+                const canvas = await html2canvas(template, {
+                    scale: 1,  // Use scale 1 to maintain exact dimensions
+                    width: 1080,
+                    height: 1920,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#0a0a0a',
+                    logging: false,
+                    windowWidth: 1080,
+                    windowHeight: 1920,
+                    x: 0,
+                    y: 0
+                });
+                
+                // Ensure canvas is exactly 1080x1920
+                const finalCanvas = document.createElement('canvas');
+                finalCanvas.width = 1080;
+                finalCanvas.height = 1920;
+                const ctx = finalCanvas.getContext('2d');
+                
+                // Fill background
+                ctx.fillStyle = '#0a0a0a';
+                ctx.fillRect(0, 0, 1080, 1920);
+                
+                // Draw captured image centered
+                ctx.drawImage(canvas, 0, 0, 1080, 1920);
+                
+                // Convert to blob and download
+                finalCanvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    const dayNum = document.getElementById('dayNumber').value;
+                    link.download = `100-days-of-code-day-${dayNum}-1080x1920.png`;
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    
+                    // Restore original styles
+                    template.style.transform = originalTransform;
+                    document.body.style.position = originalPosition;
+                    document.body.style.overflow = originalOverflow;
+                    
+                    // Reset button
+                    downloadBtn.textContent = '📥 Download Image';
+                    downloadBtn.disabled = false;
+                    
+                    // Show success message
+                    alert('✅ Image downloaded!\nSize: 1080x1920px (Instagram Reel format)');
+                }, 'image/png', 1.0);
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('❌ Download failed. Please try the screenshot method instead.');
+                downloadBtn.textContent = '📥 Download Image';
+                downloadBtn.disabled = false;
+            } finally {
+                // Show controls again
+                controls.style.display = 'block';
+            }
+        }
+
+        // Alternative download method using native browser screenshot
+        function downloadAsScreenshot() {
+            alert('📸 Alternative Method:\n\n1. Press F12 (Developer Tools)\n2. Press Ctrl+Shift+P (Command Menu)\n3. Type "screenshot"\n4. Select "Capture node screenshot"\n5. Click on the template\n\nOr use the native screenshot tool on your device!');
+        }
+
+        // Initialize template
+        applyTemplateColors(templates.neon);
+        updateTemplate();
+        
+        // Initialize icon button styles
+        document.querySelectorAll('.icon-btn').forEach(btn => {
+            const icon = btn.getAttribute('data-icon');
+            if (enabledIcons.includes(icon)) {
+                btn.style.background = 'rgba(0, 255, 255, 0.4)';
+                btn.style.borderColor = '#00ff88';
+            }
+        });
+
+        // Add real-time updates for inputs
+        document.getElementById('customTitle').addEventListener('input', () => {
+            document.querySelector('.main-title').textContent = document.getElementById('customTitle').value;
+        });
+
+        document.getElementById('dayNumber').addEventListener('input', () => {
+            document.getElementById('currentDay').textContent = document.getElementById('dayNumber').value;
+        });
+
+        document.getElementById('totalDays').addEventListener('input', () => {
+            document.getElementById('totalDayDisplay').textContent = document.getElementById('totalDays').value;
+        });
+
+        // Apply initial title styles
+        applyTitleStyles();
+    </script>
+</body>
+</html>
