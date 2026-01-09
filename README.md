@@ -2,7 +2,7 @@
 
 A simple, customizable template generator for the #100DaysOfCode community. Create visually appealing progress posts with dynamic tracking, editable design elements, and easy image export — all from your local browser.
 
-> **Live Demo**: [http://127.0.0.1:5500/index.html](http://127.0.0.1:5500/index.html)  
+> **Live Demo**: [https://code-chrono-three.vercel.app/](https://code-chrono-three.vercel.app/)  
 > *(Open in your browser to start using it!)*
 
 ---
