@@ -1,4 +1,4 @@
-# 🧠 CodeChrono – 100 Days of Code Template Generator
+# 🧠 CodeChrono –  Daily challenge Template Generator
 
 A simple, customizable template generator for the #100DaysOfCode community. Create visually appealing progress posts with dynamic tracking, editable design elements, and easy image export — all from your local browser.
 
