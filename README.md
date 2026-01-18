@@ -54,9 +54,6 @@ codechrono/ ├── index.html # Main page ├── script.js # Logic for cus
 
 ---
 
-## 📄 License
-
-This project is **open source** and available under the **MIT License**.
 
 ---
 
