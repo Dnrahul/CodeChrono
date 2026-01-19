@@ -5,8 +5,6 @@ A simple, customizable template generator for the #100DaysOfCode community. Crea
 > **Live Demo**: [https://codechrono-ashen.vercel.app/](https://codechrono-ashen.vercel.app/)  
 > *(Open in your browser to start using it!)*
 
----
-
 ## 🛠️ Features
 
 - ✅ **Progress Tracking**: Visual countdown with a customizable progress bar.
