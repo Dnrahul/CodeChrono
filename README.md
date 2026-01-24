@@ -77,4 +77,4 @@ If you encounter any issues or have suggestions, please open an issue on GitHub 
 
 ---
 
-Thank you for using **CodeChrono**! Let’s build a better coding community, one day at a time. 💻✨
+Thank you for using **CodeChrono**! Let’s build a better coding community, one day at a time. 
